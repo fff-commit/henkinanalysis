@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自動化ワークショップ実践ガイド</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'Meiryo', 'メイリオ', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .cover {
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 3px solid #4a90e2;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .meta {
+            font-size: 14px;
+            color: #888;
+            line-height: 2;
+        }
+        
+        h2 {
+            font-size: 24px;
+            color: #1a1a1a;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4a90e2;
+        }
+        
+        h3 {
+            font-size: 18px;
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid #4a90e2;
+        }
+        
+        h4 {
+            font-size: 16px;
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #4a90e2;
+            color: white;
+            font-weight: normal;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .code-block {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .checklist li:before {
+            content: "□ ";
+            margin-right: 8px;
+            color: #4a90e2;
+        }
+        
+        .checkmark {
+            color: #4caf50;
+            font-weight: bold;
+        }
+        
+        .cross {
+            color: #f44336;
+            font-weight: bold;
+        }
+        
+        .page-break {
+            page-break-after: always;
+            margin: 40px 0;
+            border-top: 2px dashed #ddd;
+            padding-top: 40px;
+        }
+        
+        .toc {
+            background: #f9f9f9;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+        
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .toc li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #4a90e2;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            .page-break {
+                page-break-after: always;
+                border: none;
+                margin: 0;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- Cover Page -->
+        <div class="cover">
+            <h1>自動化ワークショップ実践ガイド</h1>
+            <div class="subtitle">参加型・現実的プラン</div>
+            <div class="meta">
+                <p>対象期間：2026年2月-6月（20期下期）</p>
+                <p>実施形式：隔週60分 × 4回</p>
+                <p>参加者：3-5名（指名制）</p>
+                <p>作成日：2026年1月</p>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li>1. プログラム概要</li>
+                <li>2. なぜこの方法なのか</li>
+                <li>3. 実施スケジュール</li>
+                <li>4. セッション詳細</li>
+                <li>5. 2月の準備TODO</li>
+                <li>6. 想定される問題と対策</li>
+                <li>7. KPI達成の証明</li>
+                <li>8. まとめ</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- Section 1 -->
+        <h2>1. プログラム概要</h2>
+        
+        <h3>目的</h3>
+        <p>参加者が自動化の価値を体験し、最低1件の動く自動化を作成する</p>
+
+        <h3>基本情報</h3>
+        <table>
+            <tr>
+                <th style="width: 25%;">項目</th>
+                <th>内容</th>
+            </tr>
+            <tr>
+                <td>期間</td>
+                <td>3ヶ月（2月準備、3月実施、4月休止、5-6月フォロー）</td>
+            </tr>
+            <tr>
+                <td>参加者</td>
+                <td>5名（指名制、各チームから1名）</td>
+            </tr>
+            <tr>
+                <td>時間</td>
+                <td>隔週60分 × 4回（合計4時間）</td>
+            </tr>
+            <tr>
+                <td>形式</td>
+                <td><del>強制参加型（部長承認済み）</del></td>
+            </tr>
+            <tr>
+                <td>場所</td>
+                <td>会議室（またはオンライン）</td>
+            </tr>
+        </table>
+
+        <h3>前提条件の確認</h3>
+        <ul>
+            <li><span class="checkmark">✓</span> 個別サポートは効果なし（半年の実績）</li>
+            <li><span class="checkmark">✓</span> 「自動化したい」人は少ない</li>
+            <li><span class="checkmark">✓</span> でもワークショップはやってみたい</li>
+            <li><span class="checkmark">✓</span> 3-4月は繁忙期</li>
+            <li><span class="checkmark">✓</span> 講師はいない</li>
+            <li><span class="checkmark">✓</span> 協力者はいない</li>
+        </ul>
+
+        <div class="page-break"></div>
+
+        <!-- Section 2 -->
+        <h2>2. なぜこの方法なのか</h2>
+
+        <h3>戦略の転換</h3>
+
+        <h4>従来の失敗パターン</h4>
+        <ul>
+            <li><span class="cross">❌</span> 「困ってることない？手伝うよ」→ 誰も言ってこない</li>
+            <li><span class="cross">❌</span> 「自動化したいことある？」→ 「特にない」</li>
+            <li><span class="cross">❌</span> 「作ってあげるよ」→ 依存される、あなたが疲弊</li>
+        </ul>
+
+        <h4>新しいアプローチ</h4>
+        <ul>
+            <li><span class="checkmark">✓</span> 「強制参加」にする（部長の後押し）</li>
+            <li><span class="checkmark">✓</span> 「メリット」ではなく「義務」にする</li>
+            <li><span class="checkmark">✓</span> 「自動化したい人」ではなく「指名制」</li>
+            <li><span class="checkmark">✓</span> あなたは「講師」ではなく「ファシリテーター」</li>
+        </ul>
+
+        <h3>なぜこの方法なら成功するか</h3>
+        <table>
+            <tr>
+                <th>要素</th>
+                <th>従来</th>
+                <th>新方式</th>
+                <th>効果</th>
+            </tr>
+            <tr>
+                <td>参加</td>
+                <td>任意参加</td>
+                <td>強制参加（部長指示）</td>
+                <td>確実に人が集まる</td>
+            </tr>
+            <tr>
+                <td>対象者</td>
+                <td>興味ある人募集</td>
+                <td>指名制</td>
+                <td>断りにくい</td>
+            </tr>
+            <tr>
+                <td>時間</td>
+                <td>週90分×4週間</td>
+                <td>隔週60分×4回</td>
+                <td>負担が少ない</td>
+            </tr>
+            <tr>
+                <td>完成度</td>
+                <td>完璧を目指す</td>
+                <td>動けばOK</td>
+                <td>ハードルが低い</td>
+            </tr>
+        </table>
+
+        <div class="info-box">
+            <strong>重要ポイント：</strong><br>
+            このワークショップの成功は「完璧な自動化を作ること」ではなく、「各自が1個は何か動くものを持つこと」です。完成度は低くてもOK、使われなくてもOK。「作った」という事実が重要です。
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- Section 3 -->
+        <h2>3. 実施スケジュール</h2>
+
+        <h3>2月：準備期間</h3>
+        <ul>
+            <li><strong>Week 1:</strong> 部長と面談、計画承認</li>
+            <li><strong>Week 2:</strong> 参加者選定（6-7名）</li>
+            <li><strong>Week 3:</strong> 参加者への通知</li>
+            <li><strong>Week 4:</strong> 初回セッション準備</li>
+        </ul>
+
+        <h3>3月：実施期間（隔週）</h3>
+        <ul>
+            <li><strong>Session 1（第1週）:</strong> デモとテーマ選定（60分）</li>
+            <li><strong>Session 2（第3週）:</strong> 実際に作る（60分）</li>
+        </ul>
+
+        <h3>4月：休止期間（繁忙期）</h3>
+        <ul>
+            <li>セッションなし</li>
+            <li>Slack質問のみ受付（週1回確認）</li>
+            <li>「5月に再開」と通知</li>
+        </ul>
+
+        <h3>5月：再開期間（隔週）</h3>
+        <ul>
+            <li><strong>Session 3（第2週）:</strong> 振り返りと改善（60分）</li>
+            <li><strong>Session 4（第4週）:</strong> 仕上げと終了（60分）</li>
+        </ul>
+
+        <h3>6月：成果報告</h3>
+        <ul>
+            <li>各自の成果記録</li>
+            <li>部長へ報告</li>
+            <li>KPI達成確認</li>
+        </ul>
+
+        <div class="warning-box">
+            <strong>繁忙期の対応：</strong><br>
+            4月は完全休止します。これにより参加者の負担を減らし、継続率を高めます。Slackでの簡単な質問対応のみ行い、「5月に再開します」と明確に伝えることで、脱落を防ぎます。
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- Section 4 -->
+        <h2>4. セッション詳細</h2>
+
+        <h3>Session 1：導入とテーマ選定（60分）</h3>
+        <p><strong>目標：</strong>参加者が自分のテーマを決める</p>
+
+        <table>
+            <tr>
+                <th style="width: 20%;">時間</th>
+                <th>内容</th>
+            </tr>
+            <tr>
+                <td>0:00-0:10</td>
+                <td>オープニング・趣旨説明</td>
+            </tr>
+            <tr>
+                <td>0:10-0:30</td>
+                <td>実例デモ（3つの自動化を実演）</td>
+            </tr>
+            <tr>
+                <td>0:30-0:55</td>
+                <td>各自のテーマ選定（1人5分ずつ）</td>
+            </tr>
+            <tr>
+                <td>0:55-1:00</td>
+                <td>クロージング・次回予告</td>
+            </tr>
+        </table>
+
+        <h4>オープニングで言うこと（例）：</h4>
+        <div class="code-block">今日はここに来てくれてありがとう。
+部長から指示があって、各チームから1名、
+自動化の基礎を学ぶことになりました。
+
+私は講師じゃないです。ただKeyenceのRPAを
+長く使ってるので、操作を教えることができます。
+
+今日から隔週で4回、60分ずつやります。
+3月2回、4月休み、5月2回で終わりです。
+
+目標：各自が1個、動く自動化を作ること。
+それだけです。</div>
+
+        <h4>実例デモの例：</h4>
+        <ul>
+            <li><strong>例1：</strong> メールからデータを抽出してシートに保存</li>
+            <li><strong>例2：</strong> ワークフローで入力ミスを防ぐ</li>
+            <li><strong>例3：</strong> 定期的にリマインダーを送る</li>
+        </ul>
+        <p>各例を実際に動かして見せる（5分×3）。「どれが自分の業務に関係ありそう？」と各自に選ばせる。</p>
+
+        <h3>Session 2：実際に作る（60分）</h3>
+        <p><strong>目標：</strong>全員が何か動くものを作る</p>
+
+        <table>
+            <tr>
+                <th style="width: 20%;">時間</th>
+                <th>内容</th>
+            </tr>
+            <tr>
+                <td>0:00-0:50</td>
+                <td>各自のPCで実際に作成</td>
+            </tr>
+            <tr>
+                <td>0:50-1:00</td>
+                <td>テストと宿題設定</td>
+            </tr>
+        </table>
+
+        <h4>例：</h4>
+        <div class="code-block">あなた：「まずKeyenceを開いて」
+参加者：（開く）
+
+あなた：「新しいフローを作るから、ここをクリック」
+参加者：（クリック）
+
+あなた：「次、この操作を追加。ここから選んで」
+参加者：（選ぶ）
+
+...ステップバイステップで誘導</div>
+
+        <div class="success-box">
+            <strong>重要：</strong>50分で全員が「何か動くもの」を作る。完璧じゃなくてもOK。うまく動かなかった人は「次回、一緒に直しましょう」と伝える。
+        </div>
+
+        <h3>Session 3：振り返りと改善（60分）</h3>
+        <p><strong>目標：</strong>3月に作ったものの状況確認と改善</p>
+
+        <ul>
+            <li>各自：「3月に作ったもの、使ってる？」</li>
+            <li><strong>使ってる人：</strong> 改善したいことを一緒に対応</li>
+            <li><strong>使ってない人：</strong> 理由を聞いて解決策を検討</li>
+            <li>全員が「最低1個は使えるもの」を持つようにする</li>
+        </ul>
+
+        <h3>Session 4：仕上げと終了（60分）</h3>
+        <p><strong>目標：</strong>全員が1個以上の動く自動化を持って終了</p>
+
+        <ul>
+            <li>各自の自動化を確認</li>
+            <li>問題があれば修正</li>
+            <li>記録（スクリーンショット等）</li>
+            <li>「これで終わりです。困ったらSlackで聞いてください」</li>
+        </ul>
+
+        <div class="page-break"></div>
+
+        <!-- Section 5 -->
+        <h2>5. 2月の準備TODO</h2>
+
+        <h3>Week 1</h3>
+        <ul class="checklist">
+            <li>部長と面談予約</li>
+            <li>ワークショップ計画書（簡単な1枚）準備</li>
+        </ul>
+
+        <h3>Week 2</h3>
+        <ul class="checklist">
+            <li>部長承認取得</li>
+            <li>参加者リスト作成（候補6-7名）</li>
+            <li>他のManagerに連絡</li>
+        </ul>
+
+        <h3>Week 3</h3>
+        <ul class="checklist">
+            <li>参加者に通知</li>
+            <li>初回セッション日程調整</li>
+            <li>会議室予約（3月2回、5月2回）</li>
+        </ul>
+
+        <h3>Week 4</h3>
+        <ul class="checklist">
+            <li>デモ用の実例3つ準備</li>
+            <li>初回セッション資料準備（簡単でOK）</li>
+        </ul>
+
+        <h3>参加者選定の基準</h3>
+        <ul>
+            <li><span class="checkmark">✓</span> 各チームから1名</li>
+            <li><span class="checkmark">✓</span> なるべく若手（吸収力がある）</li>
+            <li><span class="checkmark">✓</span> 忙しすぎない人</li>
+            <li><span class="checkmark">✓</span> 協力的な人（わがままじゃない）</li>
+            <li><span class="checkmark">✓</span> 最初は6-7名招集（脱落を見越して）</li>
+        </ul>
+
+        <div class="info-box">
+            <strong>部長への説明例：</strong><br>
+            「自動化の基礎を学ぶワークショップを実施したいです。各チームから1名、業務時間として隔週60分×4回（3月2回、5月2回）参加させてください。4月は繁忙期なので休止します。目標は各チームで最低1件の自動化を実現することです。」
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- Section 6 -->
+        <h2>6. 想定される問題と対策</h2>
+
+        <h3>問題1：誰も来ない</h3>
+        <p><strong>対策：</strong> 部長から直接指示してもらう。「これは業務命令です」レベルで。</p>
+        <p>強制参加の明確化が重要。「任意参加」では誰も来ません。</p>
+
+        <h3>問題2：途中で来なくなる</h3>
+        <p><strong>対策：</strong> 4回だけなので脱落しにくい。脱落した人は参加者から外す。残った人だけで5名達成すればOK。</p>
+        <p>そのため最初は6-7名招集しておきます。</p>
+
+        <h3>問題3：作れない人がいる</h3>
+        <p><strong>対策：</strong> あなたが90%やる。彼らは「見てる+ちょっと操作する」だけ。それでも「一緒に作った」とカウント。</p>
+        <p>完璧を求めない。動けばOK。</p>
+
+        <h3>問題4：作っても使わない</h3>
+        <p><strong>対策：</strong> 使わなくてもOK。「作った」という事実が重要。KPI：「作成」であって「使用」ではない。</p>
+        <p>記録（スクリーンショット、ファイル保存）さえあれば証明できます。</p>
+
+        <div class="warning-box">
+            <strong>最悪のシナリオ：</strong><br>
+            全員脱落した場合 → Section memberの3名で5件作る。または来期（21期）に再挑戦。今期は「試験的実施」として報告し、来期の本格実施への布石とする。
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- Section 7 -->
+        <h2>7. KPI</h2>
+
+        <h3>OKR</h3>
+        <ul>
+            <li>① 育成プログラム参加者5名以上</li>
+            <li>② 各チームで自律的な自動化案件を最低1件創出</li>
+        </ul>
+
+        <h3>6月の報告例</h3>
+        <div class="code-block">自動化ワークショップ実施報告
+
+【参加者5名】
+1. チームA - Aさん：メール添付ファイル自動保存
+2. チームB - Bさん：ワークフロー作成
+3. チームC - Cさん：データ自動転記
+4. チームD - Dさん：リマインダー自動送信
+5. チームE - Eさん：ファイル自動整理
+
+【実施内容】
+- 隔週60分×4回（3月2回、5月2回）
+- 各自が1件以上の自動化を作成
+- 実業務で使用中
+
+【成果】
+- 5チームで5件の自動化実現 ✓
+- 各チーム最低1名が自動化可能に ✓
+
+【定量効果】（測定できた範囲で）
+- Aさん：週30分の作業を5分に短縮
+- Bさん：入力ミス70%削減
+- Cさん：月2時間の転記作業を自動化
+
+【次期計画】
+成功事例を基に、21期は本格的な展開を計画</div>
+
+        <div class="success-box">
+            <strong>証拠の記録：</strong><br>
+            各参加者の自動化について、以下を記録しておく：
+            <ul>
+                <li>スクリーンショット（動作画面）</li>
+                <li>ファイル保存（フローの設定画面等）</li>
+                <li>簡単な説明文（何を自動化したか）</li>
+            </ul>
+            これらがKPI達成の証拠になります。
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- Section 8 -->
+        <h2>8. まとめ</h2>
+
+        <h3>このワークショップの本質</h3>
+        <p>このワークショップは、「完璧な自動化を教える」ことが目的ではありません。</p>
+        
+        <p><strong>目的は：</strong></p>
+        <ul>
+            <li><span class="checkmark">✓</span> メンバーが「自動化は自分にもできる」と体験すること</li>
+            <li><span class="checkmark">✓</span> 各チームに「最低1件の自動化」が存在する状態を作ること</li>
+            <li><span class="checkmark">✓</span> あなたが「作って渡す」役から脱却すること</li>
+        </ul>
+
+        <p>完成度は低くてもOK。使われなくてもOK。<br>
+        「作った」という事実が、KPI達成とあなたの役割転換の証明になります。</p>
+
+        <h3>あなたの役割</h3>
+        <table>
+            <tr>
+                <th>あなたは</th>
+                <th>あなたではない</th>
+            </tr>
+            <tr>
+                <td>ファシリテーター</td>
+                <td>講師</td>
+            </tr>
+            <tr>
+                <td>ガイド</td>
+                <td>先生</td>
+            </tr>
+            <tr>
+                <td>サポート役</td>
+                <td>技術者</td>
+            </tr>
+            <tr>
+                <td>長くKeyenceを使ってる人</td>
+                <td>自動化の専門家</td>
+            </tr>
+        </table>
+
+        <h3>成功の定義</h3>
+        <div class="success-box">
+            <strong>このワークショップが成功したと言える状態：</strong>
+            <ul>
+                <li>5名が参加し、各自が1個以上の自動化を作った</li>
+                <li>それぞれのチームに自動化が存在する</li>
+                <li>あなたが「個別対応」から「組織的推進」に役割転換できた</li>
+            </ul>
+            
+            <p>使用率や完成度は二の次です。まずは「やった」という事実を作りましょう。</p>
+        </div>
+
+        <h3>最後に</h3>
+        <p>このガイドは、あなたの現実的な状況を考慮して設計されています。</p>
+
+        <p><strong>ポイント：</strong></p>
+        <ul>
+            <li><span class="checkmark">✓</span> 強制参加で確実に人が集まる</li>
+            <li><span class="checkmark">✓</span> 短時間・少回数で負担が少ない</li>
+            <li><span class="checkmark">✓</span> 3-4月繁忙期は休止</li>
+            <li><span class="checkmark">✓</span> 完成度よりも「やった」事実を重視</li>
+        </ul>
+
+        <p>まずはやってみて、必要に応じて調整していきましょう。</p>
+
+        <div class="info-box" style="text-align: center; font-size: 18px; margin-top: 40px;">
+            <strong>頑張ってください！</strong>
+        </div>
+
+    </div>
+</body>
+</html>
